@@ -17,7 +17,7 @@ ACGameState::ACGameState()
 	Score = 0;
 	SpawnedCoinCount = 0;
 	CollectedCoinCount = 0;
-	WaveDuration = 5;
+	WaveDuration = 30;
 	CurrentLevelIndex = 0;
 	MaxLevels = 3;
 	CurrentWaveIndex = 0;
