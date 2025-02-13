@@ -17,7 +17,7 @@ ACGameState::ACGameState()
 	Score = 0;
 	SpawnedCoinCount = 0;
 	CollectedCoinCount = 0;
-	WaveDuration = 30;
+	WaveDuration = 5;
 	CurrentLevelIndex = 0;
 	MaxLevels = 3;
 	CurrentWaveIndex = 0;
@@ -125,7 +125,7 @@ void ACGameState::OnCoinCollected()
 void ACGameState::EndWave()
 {
 	GetWorldTimerManager().ClearTimer(WaveTimerHandle);
-
+	
 	AddScore(Score);
 	CurrentWaveIndex++;
 
@@ -243,6 +243,8 @@ void ACGameState::ChangeLevel()
 	if (UGameInstance* GameInstance = GetGameInstance())
 		if (UCGameInstance* CGameInstance = Cast<UCGameInstance>(GameInstance))
 		{
+			GetWorldTimerManager().ClearTimer(HUDUpdateTimerHandle);
+			
 			CurrentLevelIndex++;
 			CGameInstance->CurrentLevelIndex = CurrentLevelIndex;
 

@@ -45,6 +45,14 @@ void ACCharacter::BeginPlay()
 	UpdateOverheadHP();
 }
 
+void ACCharacter::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+
+	for (auto timer : DebuffTimers)
+		GetWorldTimerManager().ClearTimer(timer.Key);
+}
+
 void ACCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
