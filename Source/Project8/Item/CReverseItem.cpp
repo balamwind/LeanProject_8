@@ -17,7 +17,7 @@ void ACReverseItem::ActivateItem(AActor* Activator)
 	if (Activator && Activator->ActorHasTag("Player"))
 	{
 		if (ACCharacter* player = Cast<ACCharacter>(Activator))
-			player->AddReverseDebuff(15);
+			player->AddReverseDebuff(FMath::FRandRange(3.f, 15.f));
 			
 		DestroyItem();
 	}

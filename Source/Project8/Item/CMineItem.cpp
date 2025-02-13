@@ -24,7 +24,7 @@ ACMineItem::ACMineItem() : ACBaseItem()
 void ACMineItem::ActivateItem(AActor* Activator)
 {
 	if (bHasExploded) return;
-	
+
 	Super::ActivateItem(Activator);
 
 	GetWorld()->GetTimerManager().SetTimer(ExplosionTimerHandle, this, &ACMineItem::Explode,
@@ -38,7 +38,7 @@ void ACMineItem::Explode()
 	UParticleSystemComponent* Particle = nullptr;
 	if (ExplosionParticle)
 		Particle = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionParticle, GetActorLocation(), GetActorRotation(),
-		                                                    false);
+		                                                    FVector(2.5f, 2.5f, 2.5f), false);
 
 	if (ExplosionSound)
 		UGameplayStatics::PlaySoundAtLocation(GetWorld(), ExplosionSound, GetActorLocation());
@@ -57,7 +57,6 @@ void ACMineItem::Explode()
 	if (Particle)
 	{
 		FTimerHandle DestroyParticleTimerHandle;
-
 		GetWorld()->GetTimerManager().SetTimer(DestroyParticleTimerHandle, [Particle]()
 		{
 			Particle->DestroyComponent();
