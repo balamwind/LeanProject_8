@@ -137,6 +137,9 @@ void ACGameState::EndWave()
 
 void ACGameState::OnGameOver()
 {
+	GetWorldTimerManager().ClearTimer(WaveTimerHandle);
+	GetWorldTimerManager().ClearTimer(HUDUpdateTimerHandle);
+	
 	if (APlayerController* PlayerController = GetWorld()->GetFirstPlayerController())
 		if (ACPlayerController* CPlayerController = Cast<ACPlayerController>(PlayerController))
 		{
